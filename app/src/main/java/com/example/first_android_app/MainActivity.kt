@@ -23,21 +23,21 @@ class MainActivity : AppCompatActivity() {
             // when left button is clicked, get both number values
             handleButtonClick(btnLeft, btnRight, true)
             // assign new numbers to each button
-            resetNumbers(btnLeft, btnRight);
+            resetNumbers(btnLeft, btnRight)
         }
 
         btnRight.setOnClickListener {
             // when left button is clicked, get both number values
             handleButtonClick(btnLeft, btnRight, false)
             // assign new numbers to each button
-            resetNumbers(btnLeft, btnRight);
+            resetNumbers(btnLeft, btnRight)
         }
     }
 
     fun handleButtonClick(leftButton: Button, rightButton: Button, isLeftButton: Boolean) {
         val leftNumber = leftButton.text.toString().toInt()
         val rightNumber = rightButton.text.toString().toInt()
-        var toastMessage: String
+        val toastMessage: String
 
         if (isLeftButton) {
             toastMessage = if (leftNumber > rightNumber) respondCorrect() else respondIncorrect()
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun respondIncorrect(): String {
-        findViewById<ConstraintLayout>(R.id.backgroundView).setBackgroundColor(Color.RED);
+        findViewById<ConstraintLayout>(R.id.backgroundView).setBackgroundColor(Color.RED)
         return "Incorrect :/"
     }
 }
