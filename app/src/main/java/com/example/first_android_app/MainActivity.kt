@@ -21,58 +21,52 @@ class MainActivity : AppCompatActivity() {
         // .setOnClickListener (addEventListener)
         btnLeft.setOnClickListener {
             // when left button is clicked, get both number values
-            val leftNumber = btnLeft.text.toString().toInt()
-            val rightNumber = btnRight.text.toString().toInt()
-
-            val backGroundView = findViewById<ConstraintLayout>(R.id.backgroundView)
-            // compare which is larger
-            if (leftNumber > rightNumber) {
-                // change background color to green
-                backGroundView.setBackgroundColor(Color.GREEN)
-                // show Toast notification "Correct!"
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-            } else {
-                // change background color to red
-                backGroundView.setBackgroundColor(Color.RED)
-                // show Toast notification "Incorrect :/"
-                Toast.makeText(this, "Incorrect :/", Toast.LENGTH_SHORT).show()
-            }
+            handleButtonClick(btnLeft, btnRight, true)
             // assign new numbers to each button
-
-            val random = Random()
-            btnLeft.text = random.nextInt(10).toString()
-            btnRight.text = random.nextInt(10).toString()
-            while (btnLeft.text.toString() === btnRight.text.toString()) {
-                btnRight.text = random.nextInt(10).toString()
-            }
+            resetNumbers(btnLeft, btnRight);
         }
 
         btnRight.setOnClickListener {
             // when left button is clicked, get both number values
-            val leftNumber = btnLeft.text.toString().toInt()
-            val rightNumber = btnRight.text.toString().toInt()
-
-            val backGroundView = findViewById<ConstraintLayout>(R.id.backgroundView)
-            // compare which is larger
-            if (leftNumber < rightNumber) {
-                // change background color to green
-                backGroundView.setBackgroundColor(Color.GREEN)
-                // show Toast notification "Correct!"
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-            } else {
-                // change background color to red
-                backGroundView.setBackgroundColor(Color.RED)
-                // show Toast notification "Incorrect :/"
-                Toast.makeText(this, "Incorrect :/", Toast.LENGTH_SHORT).show()
-            }
+            handleButtonClick(btnLeft, btnRight, false)
             // assign new numbers to each button
+            resetNumbers(btnLeft, btnRight);
+        }
+    }
 
-            val random = Random()
-            btnLeft.text = random.nextInt(10).toString()
-            btnRight.text = random.nextInt(10).toString()
-            while (btnLeft.text.toString() === btnRight.text.toString()) {
-                btnRight.text = random.nextInt(10).toString()
+    fun handleButtonClick(leftButton: Button, rightButton: Button, isLeftButton: Boolean) {
+        val leftNumber = leftButton.text.toString().toInt()
+        val rightNumber = rightButton.text.toString().toInt()
+        val backGroundView = findViewById<ConstraintLayout>(R.id.backgroundView)
+        var backGroundColor: Int
+        var toastMessage: String
+        if (isLeftButton) {
+            if (leftNumber > rightNumber) {
+                backGroundColor = Color.GREEN
+                toastMessage = "Correct!"
+            } else {
+                backGroundColor = Color.RED
+                toastMessage = "Incorrect :/"
             }
+        } else {
+            if (rightNumber > leftNumber) {
+                backGroundColor = Color.GREEN
+                toastMessage = "Correct!"
+            } else {
+                backGroundColor = Color.RED
+                toastMessage = "Incorrect :/"
+            }
+        }
+        backGroundView.setBackgroundColor(backGroundColor)
+        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    fun resetNumbers(leftButton: Button, rightButton: Button) {
+        val random = Random()
+        leftButton.text = random.nextInt(10).toString()
+        rightButton.text = random.nextInt(10).toString()
+        while (leftButton.text.toString() === rightButton.text.toString()) {
+            rightButton.text = random.nextInt(10).toString()
         }
     }
 }
