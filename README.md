@@ -6,4 +6,4 @@
 
 
 ### Walkthrough of Application
-<img src="https://j.gifs.com/mqmOKA.gif" alt="demo of application functionality">
+<img src="https://j.gifs.com/mqmOKA.gif" alt="demo of application functionality" height="400px">
