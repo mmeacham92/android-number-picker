@@ -41,6 +41,35 @@ class MainActivity : AppCompatActivity() {
 
             val random = Random()
             btnLeft.text = random.nextInt(10).toString()
+            btnRight.text = random.nextInt(10).toString()
+            while (btnLeft.text.toString() === btnRight.text.toString()) {
+                btnRight.text = random.nextInt(10).toString()
+            }
+        }
+
+        btnRight.setOnClickListener {
+            // when left button is clicked, get both number values
+            val leftNumber = btnLeft.text.toString().toInt()
+            val rightNumber = btnRight.text.toString().toInt()
+
+            val backGroundView = findViewById<ConstraintLayout>(R.id.backgroundView)
+            // compare which is larger
+            if (leftNumber < rightNumber) {
+                // change background color to green
+                backGroundView.setBackgroundColor(Color.GREEN)
+                // show Toast notification "Correct!"
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
+            } else {
+                // change background color to red
+                backGroundView.setBackgroundColor(Color.RED)
+                // show Toast notification "Incorrect :/"
+                Toast.makeText(this, "Incorrect :/", Toast.LENGTH_SHORT).show()
+            }
+            // assign new numbers to each button
+
+            val random = Random()
+            btnLeft.text = random.nextInt(10).toString()
+            btnRight.text = random.nextInt(10).toString()
             while (btnLeft.text.toString() === btnRight.text.toString()) {
                 btnRight.text = random.nextInt(10).toString()
             }
