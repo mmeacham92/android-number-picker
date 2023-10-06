@@ -37,27 +37,14 @@ class MainActivity : AppCompatActivity() {
     fun handleButtonClick(leftButton: Button, rightButton: Button, isLeftButton: Boolean) {
         val leftNumber = leftButton.text.toString().toInt()
         val rightNumber = rightButton.text.toString().toInt()
-        val backGroundView = findViewById<ConstraintLayout>(R.id.backgroundView)
-        var backGroundColor: Int
         var toastMessage: String
+
         if (isLeftButton) {
-            if (leftNumber > rightNumber) {
-                backGroundColor = Color.GREEN
-                toastMessage = "Correct!"
-            } else {
-                backGroundColor = Color.RED
-                toastMessage = "Incorrect :/"
-            }
+            toastMessage = if (leftNumber > rightNumber) respondCorrect() else respondIncorrect()
         } else {
-            if (rightNumber > leftNumber) {
-                backGroundColor = Color.GREEN
-                toastMessage = "Correct!"
-            } else {
-                backGroundColor = Color.RED
-                toastMessage = "Incorrect :/"
-            }
+            toastMessage = if (rightNumber > leftNumber) respondCorrect() else respondIncorrect()
         }
-        backGroundView.setBackgroundColor(backGroundColor)
+
         Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
     }
 
@@ -68,5 +55,15 @@ class MainActivity : AppCompatActivity() {
         while (leftButton.text.toString() === rightButton.text.toString()) {
             rightButton.text = random.nextInt(10).toString()
         }
+    }
+
+    fun respondCorrect(): String {
+        findViewById<ConstraintLayout>(R.id.backgroundView).setBackgroundColor(Color.GREEN)
+        return "Correct!"
+    }
+
+    fun respondIncorrect(): String {
+        findViewById<ConstraintLayout>(R.id.backgroundView).setBackgroundColor(Color.RED);
+        return "Incorrect :/"
     }
 }
