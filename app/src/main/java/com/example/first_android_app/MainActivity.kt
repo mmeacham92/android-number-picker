@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         leftIndex = random.nextInt(listOfPairs.size)
         do {
             rightIndex = random.nextInt(listOfPairs.size)
-        } while (leftIndex == rightIndex && listOfPairs[leftIndex].second != listOfPairs[rightIndex].second)
+        } while (leftIndex == rightIndex || listOfPairs[leftIndex].second == listOfPairs[rightIndex].second)
 
         leftButton?.text = listOfPairs[leftIndex].first
         rightButton?.text = listOfPairs[rightIndex].first
